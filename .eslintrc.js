@@ -18,5 +18,6 @@ module.exports = {
     'import/no-unresolved': 'off',
     'import/extensions': 'off',
     'no-console': 'off',
+    'import/prefer-default-export': 'off',
   },
 };
