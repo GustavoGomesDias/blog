@@ -3,9 +3,9 @@
 A ideia é fazer um blog com produção de conteúdo para quem tenha um login. O projeto é para estudar typescript e design pattern e pretendo utilizar o [front-end](https://github.com/GustavoGomesDias/codelandia-1) criado durante um desafio da comunidade do Iuricode no [Discord](https://discord.com/invite/QevDJqCzaY).
 
 ## 📕 Sumário
-1. [Preview](https://github.com/GustavoGomesDias/blogt#1--preview)
+1. [Preview](https://github.com/GustavoGomesDias/blog#1--preview)
 2. [O que eu aprendi de novo nesse projeto](https://github.com/GustavoGomesDias/blog#2--o-que-eu-aprendi-de-novo-nesse-projeto)
-3. [Tecnologias usadas](https://github.com/GustavoGomesDias/<nome_repo>#3--tecnologias-usadas)
+3. [Tecnologias usadas](https://github.com/GustavoGomesDias/blog#3--tecnologias-usadas)
 4. [Para rodar](https://github.com/GustavoGomesDias/blog#4--para-rodar-o-projeto)
 5. [Documentação](https://github.com/GustavoGomesDias/blog#5--documenta%C3%A7%C3%A3o)
 
