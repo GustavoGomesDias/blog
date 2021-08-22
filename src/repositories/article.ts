@@ -1,6 +1,19 @@
 import { ObjectId } from 'mongodb';
 import IArticle from '../interfaces/IArticles';
 
+export const findById = async (articleId: ObjectId) => {
+  try {
+    const article = await global.db?.collection('articles').findOne(
+      { _id: articleId },
+    );
+
+    return article;
+  } catch (err) {
+    console.log(err);
+    return undefined;
+  }
+};
+
 export const createArticle = async (article: IArticle) => {
   try {
     const {
