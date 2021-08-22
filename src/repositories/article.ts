@@ -54,3 +54,14 @@ export const updateArticle = async (articleId: ObjectId, article: Partial<IArtic
     return undefined;
   }
 };
+
+export const deleteArticle = async (articleId: ObjectId) => {
+  try {
+    return await global.db?.collection('articles').deleteOne({
+      _id: articleId,
+    });
+  } catch (err) {
+    console.log(err);
+    return undefined;
+  }
+};
