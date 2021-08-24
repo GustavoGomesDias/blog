@@ -25,6 +25,10 @@ Caso tenha algum preview de como ficou...
 * JWT
 * Dotenv
 
+## 4. 📝 ToDo
+- [ ] Criar validações (a do mongo só impede de salvar no banco);
+- [ ] Quando fazer o users, dropar a collection dos artigos (article) pois vai precisar colocar o usuário;
+
 ## Autor
 <table>
   <tr>

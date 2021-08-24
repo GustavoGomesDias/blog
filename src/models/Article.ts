@@ -1,27 +1,21 @@
-global.db?.createCollection('articles', {
+const articleCollection = {
   validator: {
-    $jsonScheme: {
+    $jsonSchema: {
       bsonType: 'object',
-      required: ['title', 'description', 'content', 'user_id'],
+      required: ['title', 'description', 'content'],
       properties: {
         title: {
           bsonType: 'string',
-          description: 'must be a string and is required',
         },
         description: {
           bsonType: 'string',
-          description: 'must be a string and is required',
         },
         content: {
           bsonType: 'string',
-          description: 'must be a string and is required',
-        },
-        user_id: {
-          $ref: 'users',
-          $id: 'objectId',
-          $db: 'blog',
         },
       },
     },
   },
-});
+};
+
+export default articleCollection;

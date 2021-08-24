@@ -1,37 +1,38 @@
 import { ObjectId } from 'mongodb';
+
+import db from '../infra/database';
 import IArticle from '../interfaces/IArticles';
 
-export const findById = async (articleId: ObjectId) => {
+const findById = async (articleId: ObjectId) => {
   try {
-    const article = await global.db?.collection('articles').findOne(
+    const article = await db.connect('articles');
+
+    return article?.collection('articles').findOne(
       { _id: articleId },
     );
-
-    return article;
   } catch (err) {
     console.log(err);
     return undefined;
   }
 };
 
-export const createArticle = async (article: IArticle) => {
+const createArticle = async (article: IArticle) => {
   try {
     const {
-      title, description, content, userId,
+      title, description, content,
     } = article;
 
-    const newArticle = await global.db?.collection('articles').insertOne({
-      title, description, content, user_id: userId,
+    const newArticle = await db.connect('articles');
+    return newArticle?.collection('articles').insertOne({
+      title, description, content,
     });
-
-    return newArticle;
   } catch (err) {
     console.log(err);
     return undefined;
   }
 };
 
-export const updateArticle = async (articleId: ObjectId, article: Partial<IArticle>) => {
+const updateArticle = async (articleId: ObjectId, article: Partial<IArticle>) => {
   try {
     const { title, description, content } = article;
     const updateInfoObject: Partial<IArticle> = {};
@@ -40,28 +41,37 @@ export const updateArticle = async (articleId: ObjectId, article: Partial<IArtic
     if (description) updateInfoObject.description = description;
     if (content) updateInfoObject.content = content;
 
-    const editedArticle = await global.db?.collection('articles').updateOne(
+    const editedArticle = await db.connect('articles');
+
+    return editedArticle?.collection('articles').updateOne(
       { _id: articleId },
       {
         $set: { ...updateInfoObject },
         $currentDate: { lastModified: true },
       },
     );
-
-    return editedArticle;
   } catch (err) {
     console.log(err);
     return undefined;
   }
 };
 
-export const deleteArticle = async (articleId: ObjectId) => {
+const deleteArticle = async (articleId: ObjectId) => {
   try {
-    return await global.db?.collection('articles').deleteOne({
+    const article = await db.connect('articles');
+
+    return article?.collection('articles').deleteOne({
       _id: articleId,
     });
   } catch (err) {
     console.log(err);
     return undefined;
   }
+};
+
+export default {
+  findById,
+  createArticle,
+  updateArticle,
+  deleteArticle,
 };
