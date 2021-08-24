@@ -1,11 +1,24 @@
 /* eslint-disable no-unused-vars */
-import { MongoClient, Db } from 'mongodb';
+import { MongoClient } from 'mongodb';
+import article from '../models/Article';
 
-const uri = 'mongodb://localhost';
+const uri = 'mongodb://localhost:27017/blog';
 
-// eslint-disable-next-line consistent-return
-MongoClient.connect(uri, (err, connection) => {
-  if (err) return console.log(err);
+const connect = async (collectionName: string) => {
+  try {
+    const connection = await MongoClient.connect(uri);
 
-  global.db = connection?.db('blog');
-});
+    const db = connection.db('blog');
+    const collections = await db.collections();
+    const coll = collections.map((collect) => collect.collectionName).includes(collectionName);
+    if (!coll) await db.createCollection(collectionName, article);
+    return db;
+  } catch (err) {
+    console.log(err);
+    return undefined;
+  }
+};
+
+export default {
+  connect,
+};
