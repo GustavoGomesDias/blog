@@ -33,9 +33,11 @@ const createArticle = async (article: ArticleInput) => {
   }
 };
 
-const updateArticle = async (articleId: ObjectId, article: Partial<IArticle>) => {
+const updateArticle = async (article: Partial<IArticle>) => {
   try {
-    const { title, description, content } = article;
+    const {
+      articleId, title, description, content,
+    } = article;
     const updateInfoObject: Partial<IArticle> = {};
 
     if (title) updateInfoObject.title = title;
@@ -45,7 +47,7 @@ const updateArticle = async (articleId: ObjectId, article: Partial<IArticle>) =>
     const editedArticle = await db.connect('articles', ArticleModel);
 
     return editedArticle?.collection('articles').updateOne(
-      { _id: articleId },
+      { _id: new ObjectId(articleId) },
       {
         $set: { ...updateInfoObject },
         $currentDate: { lastModified: true },

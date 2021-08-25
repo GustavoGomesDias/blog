@@ -45,8 +45,29 @@ const createArticle = async (req: Request, res: Response) => {
   }
 };
 
+const updateArticle = async (req: Request, res: Response) => {
+  try {
+    // comparar req.userId com user_id;
+    const {
+      articleId, title, description, content,
+    }: Partial<IArticle> = req.body;
+
+    if (!articleId) return res.status(400).json({ error: 'Falha no envio do id' });
+
+    await Article.updateArticle({
+      articleId, title, description, content,
+    });
+
+    return res.status(200).json({ message: 'Artigo alterado com sucesso' });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ error: err });
+  }
+};
+
 export default {
-  createArticle,
   getArticlesByUserId,
   getArticleById,
+  createArticle,
+  updateArticle,
 };
