@@ -2,10 +2,11 @@ import { ObjectId } from 'mongodb';
 
 import db from '../infra/database';
 import IArticle from '../interfaces/IArticles';
+import ArticleModel from '../models/Article';
 
 const findById = async (articleId: ObjectId) => {
   try {
-    const article = await db.connect('articles');
+    const article = await db.connect('articles', ArticleModel);
 
     return article?.collection('articles').findOne(
       { _id: articleId },
@@ -22,7 +23,7 @@ const createArticle = async (article: IArticle) => {
       title, description, content,
     } = article;
 
-    const newArticle = await db.connect('articles');
+    const newArticle = await db.connect('articles', ArticleModel);
     return newArticle?.collection('articles').insertOne({
       title, description, content,
     });
@@ -41,7 +42,7 @@ const updateArticle = async (articleId: ObjectId, article: Partial<IArticle>) =>
     if (description) updateInfoObject.description = description;
     if (content) updateInfoObject.content = content;
 
-    const editedArticle = await db.connect('articles');
+    const editedArticle = await db.connect('articles', ArticleModel);
 
     return editedArticle?.collection('articles').updateOne(
       { _id: articleId },
@@ -58,7 +59,7 @@ const updateArticle = async (articleId: ObjectId, article: Partial<IArticle>) =>
 
 const deleteArticle = async (articleId: ObjectId) => {
   try {
-    const article = await db.connect('articles');
+    const article = await db.connect('articles', ArticleModel);
 
     return article?.collection('articles').deleteOne({
       _id: articleId,

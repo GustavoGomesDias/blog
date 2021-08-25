@@ -20,11 +20,9 @@ const createArticle = async (req: Request, res: Response) => {
       return res.status(400).json({ error: 'Conteúdo não é válido.' });
     }
 
-    const article = await Article.createArticle({ title, description, content });
+    await Article.createArticle({ title, description, content });
 
-    console.log(article);
-
-    return res.status(201).json({ message: 'Artigo criado com sucesso!', article });
+    return res.status(201).json({ message: 'Artigo criado com sucesso!' });
   } catch (err) {
     console.log(err);
     return res.status(400).json({ error: err });

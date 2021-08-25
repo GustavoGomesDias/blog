@@ -1,4 +1,4 @@
-global.db?.createCollection('users', {
+const userCollection = {
   validator: {
     $jsonScheme: {
       bsonType: 'object',
@@ -21,4 +21,6 @@ global.db?.createCollection('users', {
       },
     },
   },
-});
+};
+
+export default userCollection;
