@@ -4,6 +4,22 @@ import { validationField } from '../validations/validations';
 import Article from '../repositories/article';
 import IArticle from '../interfaces/IArticles';
 
+// Usar o id do user vindo do req.userId no meddleware
+const getArticlesByUserId = () => {};
+
+const getArticleById = async (req: Request, res: Response) => {
+  try {
+    const { articleId } = req.params;
+
+    const article = await Article.findById(articleId);
+
+    return res.status(200).json(article);
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ error: err });
+  }
+};
+
 const createArticle = async (req: Request, res: Response) => {
   try {
     const { title, description, content }: IArticle = req.body;
@@ -25,10 +41,12 @@ const createArticle = async (req: Request, res: Response) => {
     return res.status(201).json({ message: 'Artigo criado com sucesso!' });
   } catch (err) {
     console.log(err);
-    return res.status(400).json({ error: err });
+    return res.status(500).json({ error: err });
   }
 };
 
 export default {
   createArticle,
+  getArticlesByUserId,
+  getArticleById,
 };

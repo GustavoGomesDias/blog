@@ -1,6 +1,6 @@
 import express from 'express';
 
-import Article from './routes/articles';
+import Article from './routes/article';
 
 const app = express();
 

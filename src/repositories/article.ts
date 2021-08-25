@@ -1,15 +1,15 @@
 import { ObjectId } from 'mongodb';
 
 import db from '../infra/database';
-import IArticle from '../interfaces/IArticles';
+import IArticle, { ArticleInput } from '../interfaces/IArticles';
 import ArticleModel from '../models/Article';
 
-const findById = async (articleId: ObjectId) => {
+const findById = async (articleId: string) => {
   try {
     const article = await db.connect('articles', ArticleModel);
 
     return article?.collection('articles').findOne(
-      { _id: articleId },
+      { _id: new ObjectId(articleId) },
     );
   } catch (err) {
     console.log(err);
@@ -17,7 +17,7 @@ const findById = async (articleId: ObjectId) => {
   }
 };
 
-const createArticle = async (article: IArticle) => {
+const createArticle = async (article: ArticleInput) => {
   try {
     const {
       title, description, content,
