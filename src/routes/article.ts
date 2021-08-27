@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import Article from '../controllers/article';
+import Article from '../controllers/ArticleController';
 
 const route = Router();
 

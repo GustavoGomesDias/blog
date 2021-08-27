@@ -1,3 +1,5 @@
+import Database from '../infra/database';
+
 interface IArticle {
   articleId: string;
   title: string;
@@ -7,5 +9,9 @@ interface IArticle {
 }
 
 export type ArticleInput = Omit<IArticle, 'articleId'>
+
+export interface IArticleRepository {
+  db: Database;
+}
 
 export default IArticle;
